@@ -1,0 +1,2 @@
+# ShortcutsKit
+📦 ShortcutsKit for macOS
