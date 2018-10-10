@@ -18,6 +18,7 @@
 		98B73F6E216CE59D00D128A9 /* SCHotkey.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B73F6C216CE59D00D128A9 /* SCHotkey.m */; };
 		98B73F71216CE5BB00D128A9 /* SCHotkeyManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B73F6F216CE5BB00D128A9 /* SCHotkeyManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		98B73F72216CE5BB00D128A9 /* SCHotkeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B73F70216CE5BB00D128A9 /* SCHotkeyManager.m */; };
+		98B73F77216D006900D128A9 /* ShortcutsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B73F47216CDA8F00D128A9 /* ShortcutsKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98B73F77216D006900D128A9 /* ShortcutsKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +66,7 @@
 				98B73F49216CDA8F00D128A9 /* ShortcutsKit */,
 				98B73F57216CE08A00D128A9 /* ShortcutsDemo */,
 				98B73F48216CDA8F00D128A9 /* Products */,
+				98B73F76216D006900D128A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +106,13 @@
 				98B73F63216CE08A00D128A9 /* ShortcutsDemo.entitlements */,
 			);
 			path = ShortcutsDemo;
+			sourceTree = "<group>";
+		};
+		98B73F76216D006900D128A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
