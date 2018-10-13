@@ -147,4 +147,15 @@
     return [dictSpecialKeyCode2String objectForKey:@(keyCode)];
 }
 
+-(BOOL)isEqual:(id)object{
+    BOOL bRslt = NO;
+    if ([object isKindOfClass:[self class]]) {
+        SCKeyCombo *other = (SCKeyCombo *)object;
+        if ([other keyCode] == _keyCode && [other keyModifiers] == _keyModifiers) {
+            bRslt = YES;
+        }
+    }
+    return bRslt;
+}
+
 @end
