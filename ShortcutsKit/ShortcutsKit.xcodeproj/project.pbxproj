@@ -12,6 +12,13 @@
 		98B73F5C216CE08A00D128A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98B73F5B216CE08A00D128A9 /* Assets.xcassets */; };
 		98B73F5F216CE08A00D128A9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98B73F5D216CE08A00D128A9 /* MainMenu.xib */; };
 		98B73F62216CE08A00D128A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B73F61216CE08A00D128A9 /* main.m */; };
+		98B73F69216CE45F00D128A9 /* SCKeyCombo.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B73F67216CE45F00D128A9 /* SCKeyCombo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		98B73F6A216CE45F00D128A9 /* SCKeyCombo.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B73F68216CE45F00D128A9 /* SCKeyCombo.m */; };
+		98B73F6D216CE59D00D128A9 /* SCHotkey.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B73F6B216CE59D00D128A9 /* SCHotkey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		98B73F6E216CE59D00D128A9 /* SCHotkey.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B73F6C216CE59D00D128A9 /* SCHotkey.m */; };
+		98B73F71216CE5BB00D128A9 /* SCHotkeyManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B73F6F216CE5BB00D128A9 /* SCHotkeyManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		98B73F72216CE5BB00D128A9 /* SCHotkeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B73F70216CE5BB00D128A9 /* SCHotkeyManager.m */; };
+		98B73F77216D006900D128A9 /* ShortcutsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98B73F47216CDA8F00D128A9 /* ShortcutsKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,12 @@
 		98B73F60216CE08A00D128A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98B73F61216CE08A00D128A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		98B73F63216CE08A00D128A9 /* ShortcutsDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShortcutsDemo.entitlements; sourceTree = "<group>"; };
+		98B73F67216CE45F00D128A9 /* SCKeyCombo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCKeyCombo.h; sourceTree = "<group>"; };
+		98B73F68216CE45F00D128A9 /* SCKeyCombo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCKeyCombo.m; sourceTree = "<group>"; };
+		98B73F6B216CE59D00D128A9 /* SCHotkey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCHotkey.h; sourceTree = "<group>"; };
+		98B73F6C216CE59D00D128A9 /* SCHotkey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCHotkey.m; sourceTree = "<group>"; };
+		98B73F6F216CE5BB00D128A9 /* SCHotkeyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCHotkeyManager.h; sourceTree = "<group>"; };
+		98B73F70216CE5BB00D128A9 /* SCHotkeyManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCHotkeyManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98B73F77216D006900D128A9 /* ShortcutsKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +66,7 @@
 				98B73F49216CDA8F00D128A9 /* ShortcutsKit */,
 				98B73F57216CE08A00D128A9 /* ShortcutsDemo */,
 				98B73F48216CDA8F00D128A9 /* Products */,
+				98B73F76216D006900D128A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +83,12 @@
 			isa = PBXGroup;
 			children = (
 				98B73F4A216CDA8F00D128A9 /* ShortcutsKit.h */,
+				98B73F6F216CE5BB00D128A9 /* SCHotkeyManager.h */,
+				98B73F70216CE5BB00D128A9 /* SCHotkeyManager.m */,
+				98B73F6B216CE59D00D128A9 /* SCHotkey.h */,
+				98B73F6C216CE59D00D128A9 /* SCHotkey.m */,
+				98B73F67216CE45F00D128A9 /* SCKeyCombo.h */,
+				98B73F68216CE45F00D128A9 /* SCKeyCombo.m */,
 				98B73F4B216CDA8F00D128A9 /* Info.plist */,
 			);
 			path = ShortcutsKit;
@@ -87,6 +108,13 @@
 			path = ShortcutsDemo;
 			sourceTree = "<group>";
 		};
+		98B73F76216D006900D128A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -94,7 +122,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98B73F71216CE5BB00D128A9 /* SCHotkeyManager.h in Headers */,
 				98B73F4C216CDA8F00D128A9 /* ShortcutsKit.h in Headers */,
+				98B73F6D216CE59D00D128A9 /* SCHotkey.h in Headers */,
+				98B73F69216CE45F00D128A9 /* SCKeyCombo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +229,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98B73F72216CE5BB00D128A9 /* SCHotkeyManager.m in Sources */,
+				98B73F6A216CE45F00D128A9 /* SCKeyCombo.m in Sources */,
+				98B73F6E216CE59D00D128A9 /* SCHotkey.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
