@@ -20,3 +20,4 @@ FOUNDATION_EXPORT const unsigned char ShortcutsKitVersionString[];
 #import <ShortcutsKit/SCHotkeyManager.h>
 #import <ShortcutsKit/SCHotkey.h>
 #import <ShortcutsKit/SCKeyCombo.h>
+#import <ShortcutsKit/SCKeyComboView.h>
