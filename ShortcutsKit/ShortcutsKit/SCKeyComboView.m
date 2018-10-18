@@ -22,10 +22,12 @@
     NSTrackingArea          *_trackingArea;
     BOOL                    _isEditing;
     BOOL                    _isHovered;
+    
+    __weak id<SCKeyComboViewDelegate>      _delegate;
 }
 
 +(SCKeyComboView *)standardKeyComboView{
-    return [[SCKeyComboView alloc] initWithFrame:NSMakeRect(0, 0, 180, 30)];
+    return [[SCKeyComboView alloc] initWithFrame:NSMakeRect(0, 0, 150, 30)];
 }
 
 -(instancetype)init{
@@ -50,9 +52,9 @@
     _onTintColor = [NSColor colorWithCalibratedRed:0 green:126/255.0 blue:200/255.0 alpha:1.0];
     _tintColor = [NSColor grayColor];
     _cornerRadius = 15.f;
-    _btnClear = [[NSButton alloc] initWithFrame: NSMakeRect(0, 0, 16, 16)];
     _isEditing = NO;
     _isHovered = NO;
+    _btnClear = [[NSButton alloc] initWithFrame: NSMakeRect(0, 0, 16, 16)];
     [_btnClear setBezelStyle:NSRegularSquareBezelStyle];
     [_btnClear setButtonType: NSButtonTypeMomentaryChange];
     [_btnClear setBordered:NO];
@@ -61,6 +63,7 @@
     [_btnClear setTarget:self];
     [_btnClear setAction:@selector(clearButton_click:)];
     [self addSubview:_btnClear];
+    _delegate = nil;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -163,11 +166,20 @@
         if(0 != ([event modifierFlags] & NSShiftKeyMask)){
             modifiers += shiftKey;
         }
+        if ([event keyCode] == [_keyCombo keyCode] && modifiers == [_keyCombo keyModifiers]) {
+            return;
+        }
+        if ([_delegate respondsToSelector:@selector(keyComboWillChange:)]) {
+            [_delegate keyComboWillChange:self];
+        }
         if (nil == _keyCombo) {
             _keyCombo = [[SCKeyCombo alloc] initWithKeyCode:[event keyCode] keyModifiers:modifiers];
         }
         [_keyCombo setKeyCode:[event keyCode]];
         [_keyCombo setKeyModifiers:modifiers];
+        if ([_delegate respondsToSelector:@selector(keyComboDidChanged:)]) {
+            [_delegate keyComboDidChanged:self];
+        }
         [self setNeedsDisplay:YES];
     }
 }
