@@ -187,9 +187,15 @@
 #pragma MARK - Actions
 
 -(IBAction)clearButton_click:(id)sender{
+    if ([_delegate respondsToSelector:@selector(keyComboWillChange:)]) {
+        [_delegate keyComboWillChange:self];
+    }
     _keyCombo = nil;
     _isEditing = YES;
     [self setNeedsDisplay:YES];
+    if ([_delegate respondsToSelector:@selector(keyComboDidChanged:)]) {
+        [_delegate keyComboDidChanged:self];
+    }
 }
 
 #pragma MARK - Private methods
