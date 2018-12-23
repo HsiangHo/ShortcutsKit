@@ -6,10 +6,11 @@
 [![Platform](https://img.shields.io/badge/platform-macOS-yellow.svg)]()
 [![Language](https://img.shields.io/badge/Language-Objective--C-yellowgreen.svg)]()  
 
-[中文版](https://github.com/HsiangHo/ShortcutsKit/blob/master/README_zh.md)    
-![](https://github.com/HsiangHo/ShortcutsKit/blob/master/doc/logo.png?raw=true "Optional Title")
+[中文版](https://github.com/HsiangHo/ShortcutsKit/blob/master/README_zh.md)  
 
 📦 ShortcutsKit is an easy way for developers to register/unregister/serialize/deserialize a hotkey and display hotkeys with customization.  
+
+![](https://github.com/HsiangHo/ShortcutsKit/blob/master/doc/logo.png?raw=true "Optional Title")
 
 ## Installation
 Clone the rep, build the ShortcutsKit or copy all the source files into your project.
