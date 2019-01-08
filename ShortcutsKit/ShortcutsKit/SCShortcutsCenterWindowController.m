@@ -7,17 +7,21 @@
 //
 
 #import "SCShortcutsCenterWindowController.h"
+#import "SCHotkey.h"
+#import "SCShortcutInfoObject.h"
+#import "SCShortcutsCenterTableViewItemView.h"
 
 @interface SCShortcutsCenterWindowController ()
 
 @end
 
 @implementation SCShortcutsCenterWindowController{
-    NSTextField         *_lbTitle;
-    NSScrollView        *_scrollView;
-    NSTableView         *_tvShortcuts;
-    NSButton            *_btnAddShortcut;
-    NSButton            *_btnRemoveShortcut;
+    NSTextField                                                 *_lbTitle;
+    NSScrollView                                                *_scrollView;
+    NSTableView                                                 *_tvShortcuts;
+    NSButton                                                    *_btnAddShortcut;
+    NSButton                                                    *_btnRemoveShortcut;
+    NSMutableDictionary<NSString *, SCShortcutInfoObject *>     *_dictHotKeyMap;
 }
 
 -(instancetype)init{
@@ -28,10 +32,10 @@
 }
 
 -(void)__initializeSCShortcutsCenterWindowController{
+    _dictHotKeyMap = [[NSMutableDictionary alloc] init];
     NSRect rctWindow = NSMakeRect(0, 0, 420, 620);
     NSWindow *window = [[NSWindow alloc] initWithContentRect:rctWindow styleMask:NSWindowStyleMaskTitled | NSWindowStyleMaskFullSizeContentView | NSClosableWindowMask backing:NSBackingStoreBuffered defer:YES];
     [self setWindow:window];
-    [window setLevel:NSFloatingWindowLevel];
     [window setTitlebarAppearsTransparent:YES];
     [window setTitleVisibility:NSWindowTitleHidden];
     [window setMovableByWindowBackground:YES];
@@ -55,8 +59,14 @@
     [window.contentView addSubview:_scrollView];
     
     _tvShortcuts = [[NSTableView alloc] initWithFrame:_scrollView.bounds];
-    [_tvShortcuts setGridStyleMask: NSTableViewSolidHorizontalGridLineMask];
+    NSTableColumn *column1 = [[NSTableColumn alloc] initWithIdentifier:@"Column1"];
+    [column1 setWidth:NSWidth(_tvShortcuts.frame)];
+    [_tvShortcuts addTableColumn:column1];
+    [_tvShortcuts setUsesAlternatingRowBackgroundColors:YES];
     [_tvShortcuts setHeaderView:nil];
+    [_tvShortcuts setDataSource:(id<NSTableViewDataSource> _Nullable)self];
+    [_tvShortcuts setDelegate:(id<NSTableViewDelegate> _Nullable)self];
+    [_tvShortcuts reloadData];
     [_scrollView setDocumentView:_tvShortcuts];
     
     _btnAddShortcut = [[NSButton alloc] initWithFrame:NSMakeRect(NSMinX(_scrollView.frame) - 5, 20, 32, 32)];
@@ -80,6 +90,39 @@
 
 -(IBAction)removeButton_click:(id)sender{
     
+}
+
+#pragma mark - delegate
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row{
+    return 40;
+}
+
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row{
+    return YES;
+}
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
+    NSInteger nRows = 0;
+    NSArray *array = [_dictHotKeyMap allValues];
+    if (nil != array) {
+        nRows = [array count];
+    }
+    return nRows;
+}
+
+- (nullable NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row{
+    NSArray *array = [_dictHotKeyMap allValues];
+    SCShortcutInfoObject *infoObj = [array objectAtIndex:row];
+    SCShortcutsCenterTableViewItemView *view = [tableView makeViewWithIdentifier:@"itemView" owner:self];
+    if (nil == view) {
+        view = [[SCShortcutsCenterTableViewItemView alloc] init];
+        [view setIdentifier:@"itemView"];
+    }
+    NSRect rctView = view.frame;
+    rctView.size.width = NSWidth(tableView.frame);
+    [view setFrame:rctView];
+    [view setShortcutInfoObj:infoObj];
+    return view;
 }
 
 @end

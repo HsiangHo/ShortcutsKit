@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		9892D68021E39ADD00F06A11 /* SCShortcutsCenterWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9892D67E21E39ADD00F06A11 /* SCShortcutsCenterWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9892D68121E39ADD00F06A11 /* SCShortcutsCenterWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9892D67F21E39ADD00F06A11 /* SCShortcutsCenterWindowController.m */; };
+		98A6C35121E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A6C34F21E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.h */; };
+		98A6C35221E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A6C35021E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.m */; };
+		98A6C35621E4E898007360A2 /* SCShortcutInfoObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A6C35421E4E898007360A2 /* SCShortcutInfoObject.h */; };
+		98A6C35721E4E898007360A2 /* SCShortcutInfoObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A6C35521E4E898007360A2 /* SCShortcutInfoObject.m */; };
 		98B73F4C216CDA8F00D128A9 /* ShortcutsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B73F4A216CDA8F00D128A9 /* ShortcutsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		98B73F5A216CE08A00D128A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 98B73F59216CE08A00D128A9 /* AppDelegate.m */; };
 		98B73F5C216CE08A00D128A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98B73F5B216CE08A00D128A9 /* Assets.xcassets */; };
@@ -28,6 +32,10 @@
 /* Begin PBXFileReference section */
 		9892D67E21E39ADD00F06A11 /* SCShortcutsCenterWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCShortcutsCenterWindowController.h; sourceTree = "<group>"; };
 		9892D67F21E39ADD00F06A11 /* SCShortcutsCenterWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCShortcutsCenterWindowController.m; sourceTree = "<group>"; };
+		98A6C34F21E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCShortcutsCenterTableViewItemView.h; sourceTree = "<group>"; };
+		98A6C35021E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCShortcutsCenterTableViewItemView.m; sourceTree = "<group>"; };
+		98A6C35421E4E898007360A2 /* SCShortcutInfoObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCShortcutInfoObject.h; sourceTree = "<group>"; };
+		98A6C35521E4E898007360A2 /* SCShortcutInfoObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCShortcutInfoObject.m; sourceTree = "<group>"; };
 		98B73F47216CDA8F00D128A9 /* ShortcutsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShortcutsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98B73F4A216CDA8F00D128A9 /* ShortcutsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShortcutsKit.h; sourceTree = "<group>"; };
 		98B73F4B216CDA8F00D128A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,6 +76,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		98A6C35321E4DDE8007360A2 /* ShortcutsCenter */ = {
+			isa = PBXGroup;
+			children = (
+				98A6C34F21E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.h */,
+				98A6C35021E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.m */,
+				98A6C35421E4E898007360A2 /* SCShortcutInfoObject.h */,
+				98A6C35521E4E898007360A2 /* SCShortcutInfoObject.m */,
+				9892D67E21E39ADD00F06A11 /* SCShortcutsCenterWindowController.h */,
+				9892D67F21E39ADD00F06A11 /* SCShortcutsCenterWindowController.m */,
+			);
+			name = ShortcutsCenter;
+			sourceTree = "<group>";
+		};
 		98B73F3D216CDA8F00D128A9 = {
 			isa = PBXGroup;
 			children = (
@@ -99,8 +120,7 @@
 				98B73F68216CE45F00D128A9 /* SCKeyCombo.m */,
 				98C418E821724C5A00173FA4 /* SCKeyComboView.h */,
 				98C418E921724C5A00173FA4 /* SCKeyComboView.m */,
-				9892D67E21E39ADD00F06A11 /* SCShortcutsCenterWindowController.h */,
-				9892D67F21E39ADD00F06A11 /* SCShortcutsCenterWindowController.m */,
+				98A6C35321E4DDE8007360A2 /* ShortcutsCenter */,
 				98B73F4B216CDA8F00D128A9 /* Info.plist */,
 			);
 			path = ShortcutsKit;
@@ -135,11 +155,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				98B73F71216CE5BB00D128A9 /* SCHotkeyManager.h in Headers */,
+				98A6C35621E4E898007360A2 /* SCShortcutInfoObject.h in Headers */,
 				98B73F4C216CDA8F00D128A9 /* ShortcutsKit.h in Headers */,
 				98C418EA21724C5A00173FA4 /* SCKeyComboView.h in Headers */,
 				9892D68021E39ADD00F06A11 /* SCShortcutsCenterWindowController.h in Headers */,
 				98B73F6D216CE59D00D128A9 /* SCHotkey.h in Headers */,
 				98B73F69216CE45F00D128A9 /* SCKeyCombo.h in Headers */,
+				98A6C35121E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +274,9 @@
 				98C418EB21724C5A00173FA4 /* SCKeyComboView.m in Sources */,
 				98B73F6A216CE45F00D128A9 /* SCKeyCombo.m in Sources */,
 				98B73F6E216CE59D00D128A9 /* SCHotkey.m in Sources */,
+				98A6C35221E4DD3A007360A2 /* SCShortcutsCenterTableViewItemView.m in Sources */,
 				9892D68121E39ADD00F06A11 /* SCShortcutsCenterWindowController.m in Sources */,
+				98A6C35721E4E898007360A2 /* SCShortcutInfoObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
