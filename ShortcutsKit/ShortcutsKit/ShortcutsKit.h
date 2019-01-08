@@ -21,3 +21,4 @@ FOUNDATION_EXPORT const unsigned char ShortcutsKitVersionString[];
 #import <ShortcutsKit/SCHotkey.h>
 #import <ShortcutsKit/SCKeyCombo.h>
 #import <ShortcutsKit/SCKeyComboView.h>
+#import <ShortcutsKit/SCShortcutsCenterWindowController.h>
