@@ -54,6 +54,7 @@
     rctDescr.origin.x = NSWidth(self.frame) - NSWidth(rctDescr) - 10;
     rctDescr.origin.y = 5;
     [_keyComboView setFrame:rctDescr];
+    [_keyComboView setNeedsDisplay:YES];
 }
 
 #pragma mark - delegate
