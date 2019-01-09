@@ -41,7 +41,6 @@
     [self addSubview:_lbDescr];
     
     _keyComboView = [SCKeyComboView standardKeyComboView];
-    [_keyComboView setOnTintColor:[NSColor redColor]];
     [_keyComboView setDelegate:(id<SCKeyComboViewDelegate>)self];
     [self addSubview:_keyComboView];
 }
