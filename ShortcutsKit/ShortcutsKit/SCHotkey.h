@@ -27,6 +27,7 @@ typedef void(^hotkeyHandler)(SCHotkey *hotkey);
 -(void)invoke;
 -(BOOL)register;
 -(void)unregister;
+-(BOOL)updateKeyCombo:(SCKeyCombo*)keyCombo;
 
 @end
 NS_ASSUME_NONNULL_END

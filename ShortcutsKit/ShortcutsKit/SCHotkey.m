@@ -43,6 +43,23 @@
     return self;
 }
 
+-(BOOL)updateKeyCombo:(SCKeyCombo*)keyCombo{
+    BOOL bRslt = YES;
+    if ([[SCHotkeyManager sharedManager] isHotkeyRegisted:self]) {
+        [[SCHotkeyManager sharedManager] unregisterWithHotkey:self];
+        SCKeyCombo *tmp = _keyCombo;
+        _keyCombo = keyCombo;
+        if (![[SCHotkeyManager sharedManager] registerWithHotkey:self]) {
+            bRslt = NO;
+            _keyCombo = tmp;
+            [[SCHotkeyManager sharedManager] registerWithHotkey:self];
+        }
+    }else{
+        _keyCombo = keyCombo;
+    }
+    return bRslt;
+}
+
 -(void)invoke{
     if (NULL == _handler) {
         if ([_target respondsToSelector:_selector]) {
