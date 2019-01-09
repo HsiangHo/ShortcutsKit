@@ -34,16 +34,21 @@
 }
 
 -(void)addHotkey:(nonnull SCHotkey *)hotkey withDescription:(nonnull NSString *)descr{
+    if (nil == [hotkey identifier]) {
+        return;
+    }
     SCShortcutInfoObject *infoObj = [[SCShortcutInfoObject alloc] init];
     [infoObj setDescr:descr];
     [infoObj setHotkey:hotkey];
     [_dictHotKeyMap setValue:infoObj forKey:[hotkey identifier]];
+    [hotkey register];
 }
 
 -(void)removeHotkey:(nonnull SCHotkey *)hotkey{
     if (nil == [hotkey identifier]) {
         return;
     }
+    [hotkey unregister];
     [_dictHotKeyMap setValue:nil forKey:[hotkey identifier]];
 }
 
