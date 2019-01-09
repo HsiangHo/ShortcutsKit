@@ -17,11 +17,13 @@
 
 @implementation SCShortcutsCenterWindowController{
     NSTextField                                                 *_lbTitle;
+    NSTextField                                                 *_lbSubtitle;
     NSScrollView                                                *_scrollView;
     NSTableView                                                 *_tvShortcuts;
     NSButton                                                    *_btnAddShortcut;
     NSButton                                                    *_btnRemoveShortcut;
     NSMutableDictionary<NSString *, SCShortcutInfoObject *>     *_dictHotKeyMap;
+    __weak id<SCShortcutsCenterWindowControllerDelegate>        _delegate;
 }
 
 -(instancetype)init{
@@ -31,8 +33,43 @@
     return self;
 }
 
+-(void)addHotkey:(nonnull SCHotkey *)hotkey withDescription:(nonnull NSString *)descr{
+    SCShortcutInfoObject *infoObj = [[SCShortcutInfoObject alloc] init];
+    [infoObj setDescr:descr];
+    [infoObj setHotkey:hotkey];
+    [_dictHotKeyMap setValue:infoObj forKey:[hotkey identifier]];
+}
+
+-(void)removeHotkey:(nonnull SCHotkey *)hotkey{
+    if (nil == [hotkey identifier]) {
+        return;
+    }
+    [_dictHotKeyMap setValue:nil forKey:[hotkey identifier]];
+}
+
+-(void)setDelegate:(id<SCShortcutsCenterWindowControllerDelegate>)delegate{
+    _delegate = delegate;
+    [self updateUI];
+}
+
+-(void)updateUI{
+    NSString *title = @"Shortcuts Center";
+    if ([_delegate respondsToSelector:@selector(shortcutsCenterWindowTitle)]) {
+        title = [_delegate shortcutsCenterWindowTitle];
+    }
+    [_lbTitle setStringValue:title];
+    NSString *subtitle = @"Customize your own shortcuts:";
+    if ([_delegate respondsToSelector:@selector(shortcutsCenterWindowSubtitle)]) {
+        subtitle = [_delegate shortcutsCenterWindowSubtitle];
+    }
+    [_lbSubtitle setStringValue:subtitle];
+    [_tvShortcuts reloadData];
+}
+
+#pragma mark - private methods
 -(void)__initializeSCShortcutsCenterWindowController{
     _dictHotKeyMap = [[NSMutableDictionary alloc] init];
+    _delegate = nil;
     NSRect rctWindow = NSMakeRect(0, 0, 420, 620);
     NSWindow *window = [[NSWindow alloc] initWithContentRect:rctWindow styleMask:NSWindowStyleMaskTitled | NSWindowStyleMaskFullSizeContentView | NSClosableWindowMask backing:NSBackingStoreBuffered defer:YES];
     [self setWindow:window];
@@ -50,10 +87,19 @@
     [_lbTitle setSelectable:NO];
     [_lbTitle setBackgroundColor:[NSColor clearColor]];
     [_lbTitle setFont:[NSFont fontWithName:@"Helvetica Neue Light" size:35]];
-    [_lbTitle setStringValue:@"Shortcuts Center"];
+    [_lbTitle setStringValue:@""];
     [window.contentView addSubview:_lbTitle];
     
-    _scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(NSMinX(_lbTitle.frame), 55, NSWidth(rctWindow) - NSMinX(_lbTitle.frame) * 2, NSMinY(_lbTitle.frame) - 70)];
+    _lbSubtitle = [[NSTextField alloc] initWithFrame:NSMakeRect(25, NSMinY(_lbTitle.frame) - 65, 300, 36)];
+    [_lbSubtitle setEditable:NO];
+    [_lbSubtitle setBezeled:NO];
+    [_lbSubtitle setSelectable:NO];
+    [_lbSubtitle setBackgroundColor:[NSColor clearColor]];
+    [_lbSubtitle setFont:[NSFont fontWithName:@"Helvetica Neue Light" size:15]];
+    [_lbSubtitle setStringValue:@""];
+    [window.contentView addSubview:_lbSubtitle];
+    
+    _scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(NSMinX(_lbTitle.frame), 55, NSWidth(rctWindow) - NSMinX(_lbTitle.frame) * 2, NSMinY(_lbTitle.frame) - 110)];
     [_scrollView setWantsLayer:YES];
     [_scrollView.layer setCornerRadius:5.f];
     [window.contentView addSubview:_scrollView];
@@ -66,30 +112,41 @@
     [_tvShortcuts setHeaderView:nil];
     [_tvShortcuts setDataSource:(id<NSTableViewDataSource> _Nullable)self];
     [_tvShortcuts setDelegate:(id<NSTableViewDelegate> _Nullable)self];
-    [_tvShortcuts reloadData];
     [_scrollView setDocumentView:_tvShortcuts];
     
-    _btnAddShortcut = [[NSButton alloc] initWithFrame:NSMakeRect(NSMinX(_scrollView.frame) - 5, 20, 32, 32)];
+    _btnAddShortcut = [[NSButton alloc] initWithFrame:NSMakeRect(NSMinX(_scrollView.frame) - 3, 30, 24, 24)];
     [_btnAddShortcut setBezelStyle: NSBezelStyleRegularSquare];
     [_btnAddShortcut setImage:[NSImage imageNamed:@"NSAddTemplate"]];
     [_btnAddShortcut setAction:@selector(addButton_click:)];
     [_btnAddShortcut setTarget:self];
     [window.contentView addSubview:_btnAddShortcut];
     
-    _btnRemoveShortcut = [[NSButton alloc] initWithFrame:NSMakeRect(NSMaxX(_btnAddShortcut.frame), NSMinY(_btnAddShortcut.frame), 32, 32)];
+    _btnRemoveShortcut = [[NSButton alloc] initWithFrame:NSMakeRect(NSMaxX(_btnAddShortcut.frame), NSMinY(_btnAddShortcut.frame), 24, 24)];
     [_btnRemoveShortcut setBezelStyle: NSBezelStyleRegularSquare];
     [_btnRemoveShortcut setImage:[NSImage imageNamed:@"NSRemoveTemplate"]];
     [_btnRemoveShortcut setAction:@selector(removeButton_click:)];
     [_btnRemoveShortcut setTarget:self];
     [window.contentView addSubview:_btnRemoveShortcut];
+    
+    [self updateUI];
 }
 
 -(IBAction)addButton_click:(id)sender{
-    
+    if ([_delegate respondsToSelector:@selector(addButton_click:withShortcutsCenterWindowController:)]) {
+        [_delegate addButton_click:nil withShortcutsCenterWindowController:self];
+    }
 }
 
 -(IBAction)removeButton_click:(id)sender{
-    
+    if ([_delegate respondsToSelector:@selector(removeButton_click:withShortcutsCenterWindowController:)]) {
+        NSArray *array = [_dictHotKeyMap allValues];
+        NSInteger nSelectedRow = [_tvShortcuts selectedRow];
+        SCShortcutInfoObject *obj = nil;
+        if (nSelectedRow >= 0 && nSelectedRow < [array count]) {
+            obj = [array objectAtIndex:nSelectedRow];
+        }
+        [_delegate removeButton_click:[obj hotkey] withShortcutsCenterWindowController:self];
+    }
 }
 
 #pragma mark - delegate

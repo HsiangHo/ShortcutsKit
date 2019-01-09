@@ -8,11 +8,28 @@
 
 #import <Cocoa/Cocoa.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@class SCHotkey;
+@class SCShortcutsCenterWindowController;
+
+NS_CLASS_AVAILABLE_MAC(10_10)
+@protocol SCShortcutsCenterWindowControllerDelegate <NSObject>
+
+@optional
+-(void)addButton_click:(SCHotkey *)obj withShortcutsCenterWindowController:(SCShortcutsCenterWindowController *)controller;
+-(void)removeButton_click:(SCHotkey *)obj withShortcutsCenterWindowController:(SCShortcutsCenterWindowController *)controller;
+-(NSString *)shortcutsCenterWindowTitle;
+-(NSString *)shortcutsCenterWindowSubtitle;
+
+@end
 
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface SCShortcutsCenterWindowController : NSWindowController
 
-@end
+@property (nonatomic, weak, readwrite)      id<SCShortcutsCenterWindowControllerDelegate>       delegate;
+@property (nonatomic, copy, readonly)       NSArray<SCHotkey *>                                 *arrayHotkeys;
 
-NS_ASSUME_NONNULL_END
+-(void)addHotkey:(nonnull SCHotkey *)hotkey withDescription:(nonnull NSString *)descr;
+-(void)removeHotkey:(nonnull SCHotkey *)hotkey;
+-(void)updateUI;
+
+@end
