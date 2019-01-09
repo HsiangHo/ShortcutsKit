@@ -39,6 +39,15 @@ static SCHotkeyManager *instance;
     return self;
 }
 
+-(BOOL)isHotkeyRegisted:(SCHotkey *)hotkey{
+    BOOL bRslt = NO;
+    if(nil == hotkey){
+        return bRslt;
+    }
+    bRslt = nil != [_dictHotkeyIdentifierMap valueForKey:[hotkey identifier]];
+    return bRslt;
+}
+
 -(BOOL)registerWithHotkey:(SCHotkey *)hotkey{
     BOOL bRslt = NO;
     if(nil == hotkey){

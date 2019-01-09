@@ -13,6 +13,7 @@
 
 +(instancetype)sharedManager;
 -(BOOL)registerWithHotkey:(SCHotkey *)hotkey;
+-(BOOL)isHotkeyRegisted:(SCHotkey *)hotkey;
 -(void)unregisterWithHotkey:(SCHotkey *)hotkey;
 -(void)unregisterWithIdentifier:(NSString *)indentifier;
 -(void)unregisterAllHotkeys;
