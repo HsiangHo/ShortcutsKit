@@ -67,6 +67,32 @@
     
     [[_window contentView] addSubview:keyComboView];
     [keyComboView setFrameOrigin:NSMakePoint(100, 118)];
+    
+    //About SCShortcutsCenterWindowController
+    static SCShortcutsCenterWindowController *wndController = nil;
+    wndController = [[SCShortcutsCenterWindowController alloc] init];
+    //customize SCShortcutsCenterWindowController
+    [wndController setDelegate:(id<SCShortcutsCenterWindowControllerDelegate>)self];
+    [wndController showWindow:nil];
+    
+    SCKeyCombo *k1 = [[SCKeyCombo alloc] initWithKeyCode:kVK_ANSI_A keyModifiers:shiftKey + optionKey + controlKey];
+    SCHotkey *s1 = [[SCHotkey alloc]initWithKeyCombo:k1 identifier:@"s1" handler:^(SCHotkey * _Nonnull hotkey) {
+        NSLog(@"s1 has been called");
+    }];
+    [wndController addHotkey:s1 withDescription:@"s1"];
+    
+    SCKeyCombo *k2 = [[SCKeyCombo alloc] initWithKeyCode:kVK_ANSI_B keyModifiers:shiftKey + optionKey + controlKey];
+    SCHotkey *s2 = [[SCHotkey alloc]initWithKeyCombo:k2 identifier:@"s2" handler:^(SCHotkey * _Nonnull hotkey) {
+        NSLog(@"s2 has been called");
+    }];
+    [wndController addHotkey:s2 withDescription:@"s2"];
+    
+    SCKeyCombo *k3 = [[SCKeyCombo alloc] initWithKeyCode:kVK_ANSI_C keyModifiers:shiftKey + optionKey + controlKey];
+    SCHotkey *s3 = [[SCHotkey alloc]initWithKeyCombo:k3 identifier:@"s3" handler:^(SCHotkey * _Nonnull hotkey) {
+        NSLog(@"s3 has been called");
+    }];
+    [wndController addHotkey:s3 withDescription:@"s3"];
+    [wndController updateUI];
 }
 
 
@@ -88,6 +114,27 @@
         return;
     }
     NSLog(@"%@",[[keyComboView keyCombo] stringForKeyCombo]);
+}
+
+-(void)addButton_click:(SCHotkey *)obj withShortcutsCenterWindowController:(SCShortcutsCenterWindowController *)controller{
+    SCKeyCombo *keyCombo = [[SCKeyCombo alloc] initWithKeyCode:kVK_Space keyModifiers:shiftKey + optionKey + controlKey];
+    SCHotkey *shortcut = [[SCHotkey alloc]initWithKeyCombo:keyCombo identifier:@"shortcut" handler:^(SCHotkey * _Nonnull hotkey) {
+        NSLog(@"shortcut has been called");
+    }];
+    [controller addHotkey:shortcut withDescription:@"shortcut"];
+    [controller updateUI];
+}
+-(void)removeButton_click:(SCHotkey *)obj withShortcutsCenterWindowController:(SCShortcutsCenterWindowController *)controller{
+    [controller removeHotkey:obj];
+    [controller updateUI];
+}
+
+-(NSString *)shortcutsCenterWindowTitle{
+    return @"title";
+}
+
+-(NSString *)shortcutsCenterWindowSubtitle{
+    return @"subtitle";
 }
 
 @end
