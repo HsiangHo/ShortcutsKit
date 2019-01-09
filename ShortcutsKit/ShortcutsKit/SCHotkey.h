@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SCKeyCombo.h"
 
-NS_ASSUME_NONNULL_BEGIN
 @interface SCHotkey : NSObject
 
 typedef void(^hotkeyHandler)(SCHotkey *hotkey);
@@ -30,4 +29,3 @@ typedef void(^hotkeyHandler)(SCHotkey *hotkey);
 -(BOOL)updateKeyCombo:(SCKeyCombo*)keyCombo;
 
 @end
-NS_ASSUME_NONNULL_END
