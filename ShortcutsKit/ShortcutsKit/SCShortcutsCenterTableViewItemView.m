@@ -42,6 +42,7 @@
     
     _keyComboView = [SCKeyComboView standardKeyComboView];
     [_keyComboView setOnTintColor:[NSColor redColor]];
+    [_keyComboView setDelegate:(id<SCKeyComboViewDelegate>)self];
     [self addSubview:_keyComboView];
 }
 
@@ -53,6 +54,22 @@
     rctDescr.origin.x = NSWidth(self.frame) - NSWidth(rctDescr) - 10;
     rctDescr.origin.y = 5;
     [_keyComboView setFrame:rctDescr];
+}
+
+#pragma mark - delegate
+-(void)keyComboWillChange:(SCKeyComboView *)keyComboView{
+}
+
+-(void)keyComboDidChanged:(SCKeyComboView *)keyComboView{
+    if (nil == [keyComboView keyCombo]){
+        //clear hotkey
+        [[_infoObject hotkey] unregister];
+        [[_infoObject hotkey] updateKeyCombo:nil];
+        return;
+    }
+    [[_infoObject hotkey] updateKeyCombo:[keyComboView keyCombo]];
+    [keyComboView setKeyCombo:[[_infoObject hotkey] keyCombo]];
+    [[_infoObject hotkey] register];
 }
 
 @end
