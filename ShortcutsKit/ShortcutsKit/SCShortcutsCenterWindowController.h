@@ -19,6 +19,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 -(void)removeButton_click:(SCHotkey *)obj withShortcutsCenterWindowController:(SCShortcutsCenterWindowController *)controller;
 -(NSString *)shortcutsCenterWindowTitle;
 -(NSString *)shortcutsCenterWindowSubtitle;
+-(void)shortcutsKeyComboDidChanged:(SCHotkey *)obj;
 
 @end
 

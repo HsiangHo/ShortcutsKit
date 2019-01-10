@@ -53,10 +53,10 @@
             bRslt = NO;
             _keyCombo = tmp;
             [[SCHotkeyManager sharedManager] registerWithHotkey:self];
+            return bRslt;
         }
-    }else{
-        _keyCombo = keyCombo;
     }
+    [self setValue:keyCombo forKey:@"keyCombo"];
     return bRslt;
 }
 

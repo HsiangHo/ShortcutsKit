@@ -37,6 +37,7 @@
     if (nil == [hotkey identifier]) {
         return;
     }
+    [hotkey addObserver:self forKeyPath:@"keyCombo" options:NSKeyValueObservingOptionNew context:nil];
     SCShortcutInfoObject *infoObj = [[SCShortcutInfoObject alloc] init];
     [infoObj setDescr:descr];
     [infoObj setHotkey:hotkey];
@@ -49,6 +50,7 @@
         return;
     }
     [hotkey unregister];
+    [hotkey removeObserver:self forKeyPath:@"keyCombo" context:nil];
     [_dictHotKeyMap setValue:nil forKey:[hotkey identifier]];
 }
 
@@ -190,6 +192,16 @@
     [view setFrame:rctView];
     [view setShortcutInfoObj:infoObj];
     return view;
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"keyCombo"]) {
+        if ([_delegate respondsToSelector:@selector(shortcutsKeyComboDidChanged:)]) {
+            [_delegate shortcutsKeyComboDidChanged:object];
+        }
+    }else{
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 @end
