@@ -137,4 +137,8 @@
     return @"subtitle";
 }
 
+-(void)shortcutsKeyComboDidChanged:(SCHotkey *)obj{
+    NSLog(@"%@ did changed", obj);
+}
+
 @end
