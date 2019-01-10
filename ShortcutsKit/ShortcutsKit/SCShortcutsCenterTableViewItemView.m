@@ -12,6 +12,7 @@
 #import "SCHotkey.h"
 
 @implementation SCShortcutsCenterTableViewItemView{
+    NSImageView                 *_ivIcon;
     NSTextField                 *_lbDescr;
     SCKeyComboView              *_keyComboView;
     SCShortcutInfoObject        *_infoObject;
@@ -30,7 +31,11 @@
 }
 
 -(void)__initializeSCShortcutsCenterTableViewItemView{
-    _lbDescr = [[NSTextField alloc] initWithFrame:NSMakeRect(8, 5, 200, 25)];
+    _ivIcon = [[NSImageView alloc] initWithFrame:NSMakeRect(5, 8, 24, 24)];
+    [_ivIcon setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
+    [self addSubview:_ivIcon];
+    
+    _lbDescr = [[NSTextField alloc] initWithFrame:NSMakeRect(30, 6, 190, 25)];
     [_lbDescr setEditable:NO];
     [_lbDescr setBezeled:NO];
     [_lbDescr setSelectable:NO];
@@ -54,6 +59,11 @@
     rctDescr.origin.y = 5;
     [_keyComboView setFrame:rctDescr];
     [_keyComboView setNeedsDisplay:YES];
+    NSImage *icon = [_infoObject icon];
+    if (nil == icon) {
+        icon = [NSImage imageNamed:@"NSStatusAvailable"];
+    }
+    [_ivIcon setImage:icon];
 }
 
 #pragma mark - delegate
