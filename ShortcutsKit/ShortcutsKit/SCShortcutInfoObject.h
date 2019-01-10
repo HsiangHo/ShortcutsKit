@@ -8,14 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class SCHotkey;
 @interface SCShortcutInfoObject : NSObject
 
 @property (nonatomic, strong, readwrite)        NSString        *descr;
 @property (nonatomic, strong, readwrite)        SCHotkey        *hotkey;
+@property (nonatomic, strong, readwrite)        NSImage         *icon;
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -11,6 +11,7 @@
 @implementation SCShortcutInfoObject{
     NSString        *_descr;
     SCHotkey        *_hotkey;
+    NSImage         *_icon;
 }
 
 @end
