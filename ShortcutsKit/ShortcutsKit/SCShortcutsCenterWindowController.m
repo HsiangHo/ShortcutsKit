@@ -71,6 +71,11 @@
     [_tvShortcuts reloadData];
 }
 
+-(void)showWindow:(id)sender{
+    [super showWindow:sender];
+    [self updateUI];
+}
+
 #pragma mark - private methods
 -(void)__initializeSCShortcutsCenterWindowController{
     _dictHotKeyMap = [[NSMutableDictionary alloc] init];
