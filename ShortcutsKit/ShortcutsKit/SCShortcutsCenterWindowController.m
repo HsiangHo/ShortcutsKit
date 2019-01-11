@@ -93,7 +93,7 @@
     [[window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
     [[window standardWindowButton:NSWindowZoomButton] setHidden:YES];
     
-    _lbTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(25, NSHeight(rctWindow) - 70, 300, 36)];
+    _lbTitle = [[NSTextField alloc] initWithFrame:NSMakeRect(25, NSHeight(rctWindow) - 70, 300, 38)];
     [_lbTitle setEditable:NO];
     [_lbTitle setBezeled:NO];
     [_lbTitle setSelectable:NO];
