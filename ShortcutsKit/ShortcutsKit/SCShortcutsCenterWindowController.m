@@ -37,12 +37,14 @@
     if (nil == [hotkey identifier]) {
         return;
     }
-    [hotkey addObserver:self forKeyPath:@"keyCombo" options:NSKeyValueObservingOptionNew context:nil];
+    if (![hotkey register]) {
+        [hotkey updateKeyCombo:nil];
+    }
     SCShortcutInfoObject *infoObj = [[SCShortcutInfoObject alloc] init];
     [infoObj setDescr:descr];
     [infoObj setHotkey:hotkey];
     [_dictHotKeyMap setValue:infoObj forKey:[hotkey identifier]];
-    [hotkey register];
+    [hotkey addObserver:self forKeyPath:@"keyCombo" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 -(void)removeHotkey:(nonnull SCHotkey *)hotkey{
