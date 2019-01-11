@@ -59,11 +59,19 @@
     rctDescr.origin.y = 5;
     [_keyComboView setFrame:rctDescr];
     [_keyComboView setNeedsDisplay:YES];
+    [self __updateIcon];
+}
+
+-(void)__updateIcon{
     NSImage *icon = [_infoObject icon];
     if (nil == icon) {
-        icon = [NSImage imageNamed:@"NSStatusAvailable"];
+        if(nil != [_keyComboView keyCombo]){
+            icon = [NSImage imageNamed:@"NSStatusAvailable"];
+        }else{
+            icon = [NSImage imageNamed:@"NSStatusNone"];
+        }
+        [_ivIcon setImage:icon];
     }
-    [_ivIcon setImage:icon];
 }
 
 #pragma mark - delegate
@@ -71,6 +79,7 @@
 }
 
 -(void)keyComboDidChanged:(SCKeyComboView *)keyComboView{
+    [self __updateIcon];
     if (nil == [keyComboView keyCombo]){
         //clear hotkey
         [[_infoObject hotkey] unregister];
