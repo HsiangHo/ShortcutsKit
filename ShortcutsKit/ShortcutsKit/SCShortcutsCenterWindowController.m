@@ -43,6 +43,10 @@
     SCShortcutInfoObject *infoObj = [[SCShortcutInfoObject alloc] init];
     [infoObj setDescr:descr];
     [infoObj setHotkey:hotkey];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[hotkey identifier]]) {
+        //Handle User Select hotkey
+        [infoObj setIcon:[[NSWorkspace sharedWorkspace] iconForFile:[hotkey identifier]]];
+    }
     [_dictHotKeyMap setValue:infoObj forKey:[hotkey identifier]];
     [hotkey addObserver:self forKeyPath:@"keyCombo" options:NSKeyValueObservingOptionNew context:nil];
 }

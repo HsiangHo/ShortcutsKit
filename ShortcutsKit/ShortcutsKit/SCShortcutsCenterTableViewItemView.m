@@ -35,7 +35,7 @@
     [_ivIcon setImage:[NSImage imageNamed:@"NSStatusAvailable"]];
     [self addSubview:_ivIcon];
     
-    _lbDescr = [[NSTextField alloc] initWithFrame:NSMakeRect(30, 6, 190, 25)];
+    _lbDescr = [[NSTextField alloc] initWithFrame:NSMakeRect(33, 7, 190, 25)];
     [_lbDescr setEditable:NO];
     [_lbDescr setBezeled:NO];
     [_lbDescr setSelectable:NO];
@@ -70,8 +70,8 @@
         }else{
             icon = [NSImage imageNamed:@"NSStatusNone"];
         }
-        [_ivIcon setImage:icon];
     }
+    [_ivIcon setImage:icon];
 }
 
 #pragma mark - delegate
