@@ -50,7 +50,7 @@ static SCHotkeyManager *instance;
 
 -(BOOL)registerWithHotkey:(SCHotkey *)hotkey{
     BOOL bRslt = NO;
-    if(nil == hotkey){
+    if(nil == hotkey || nil == [hotkey keyCombo]){
         return bRslt;
     }
     EventHotKeyRef hotKeyRef = NULL;
