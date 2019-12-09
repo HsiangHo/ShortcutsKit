@@ -59,7 +59,8 @@ static SCHotkeyManager *instance;
     if (noErr != error || NULL == hotKeyRef) {
         return bRslt;
     }
-    
+
+    [hotkey setHotKeyID:_nIndex];
     [hotkey setHotKeyRef:hotKeyRef];
     [_dictHotkeyIdentifierMap setValue:hotkey forKey:[hotkey identifier]];
     [_dictHotkeyIndexMap setValue:hotkey forKey:[NSString stringWithFormat:@"%lu",(unsigned long)_nIndex]];
